@@ -144,19 +144,8 @@ void FacadeSystem::performAllParallel()
 
 IRobot* FacadeSystem::getRobot(string serialNumb)
 {
-	string printText;
 
 	IRobot* returnRobot = systemObj.getRobot(serialNumb);
-	if (returnRobot != nullptr)
-	{
-		printText = "Robot " + serialNumb + " was successfuly transfered to user";
-		cout << printText << endl;
-	}
-	else
-	{
-		printText = "Robot " + serialNumb + " wasn't found";
-		cout << printText << endl;
-	}
 	return returnRobot;
 }
 

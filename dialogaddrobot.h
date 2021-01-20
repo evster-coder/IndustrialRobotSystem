@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QDoubleValidator>
 
 #include "src/FacadeSystem.h"
 

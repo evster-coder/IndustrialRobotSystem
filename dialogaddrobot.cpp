@@ -6,6 +6,7 @@ DialogAddRobot::DialogAddRobot(QWidget *parent) :
     ui(new Ui::DialogAddRobot)
 {
     ui->setupUi(this);
+    ui->lineRobotCapacity->setValidator(new QDoubleValidator(ui->lineRobotCapacity));
 
     //постоянный размер окна
     this->setFixedSize(this->size());
@@ -33,6 +34,31 @@ void DialogAddRobot::closeWindow()
 
 void DialogAddRobot::addRobot()
 {
+    //проверка введенных данных
+    if(ui->comboBoxExecutiveUnit->currentIndex() > 1)
+    {
+        QMessageBox::warning(this, "Предупреждение", "Неверно выбран рабочий орган");
+        return;
+    }
+
+    if(ui->lineSerialNumber->text().length() < 3)
+    {
+        QMessageBox::warning(this, "Предупреждение", "Серийный номер слишком короткий");
+        return;
+    }
+
+    if(FacadeSystem::getInstance()->getRobot(ui->lineSerialNumber->text().toStdString()) != nullptr)
+    {
+        QMessageBox::warning(this, "Предупреждение", "Робот с таким серийным номером уже присутствует в системе");
+        return;
+    }
+
+    if(ui->lineRobotCapacity->text().toDouble() < 0)
+    {
+        QMessageBox::warning(this, "Предупреждение", "Отрицательная грузоподъемность недопустима");
+        return;
+    }
+
     //создание рабочего органа робота
     ExecutiveUnit* item;
     switch(ui->comboBoxExecutiveUnit->currentIndex())
