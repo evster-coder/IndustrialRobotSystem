@@ -79,19 +79,7 @@ bool FacadeSystem::pushRobot(IRobot* newRobot)
 
 bool FacadeSystem::eraseRobot(string serialNumb)
 {
-	string printText;
-	if (systemObj.eraseRobot(serialNumb) == true)
-	{
-		printText = "Robot " + serialNumb + " was successfuly erased from system";
-		cout << printText << endl;
-		return true;
-	}
-	else
-	{
-		printText = "Robot " + serialNumb + " wasn't erased from system";
-		cout << printText << endl;
-		return false;
-	}
+    return systemObj.eraseRobot(serialNumb);
 }
 
 void FacadeSystem::performAllConsistently()

@@ -5,6 +5,7 @@
 #include <QVector>
 
 #include "dialogaddrobot.h"
+#include "dialogdeleterobot.h"
 
 #include "src/FacadeSystem.h"
 
@@ -27,6 +28,9 @@ public:
 private slots:
     //вызов окна внесения нового робота в систему
     void addNewRobotDialog();
+
+    //вызов окна удаления робота из системы
+    void eraseRobotDialog();
 
 private:
     Ui::MainWindowApp *ui;

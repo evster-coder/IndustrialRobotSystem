@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     dialogaddrobot.cpp \
+    dialogdeleterobot.cpp \
     main.cpp \
     mainwindowapp.cpp \
     src/ActivateExecutiveUnit.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
 
 HEADERS += \
     dialogaddrobot.h \
+    dialogdeleterobot.h \
     mainwindowapp.h \
     src/ActivateExecutiveUnit.h \
     src/ControlSystem.h \
@@ -66,6 +68,7 @@ HEADERS += \
 
 FORMS += \
     dialogaddrobot.ui \
+    dialogdeleterobot.ui \
     mainwindowapp.ui
 
 # Default rules for deployment.
