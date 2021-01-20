@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include "dialogaddrobot.h"
-#include "FacadeSystem.h"
+#include "src/FacadeSystem.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowApp; }

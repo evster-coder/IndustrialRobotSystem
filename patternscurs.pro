@@ -9,60 +9,60 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ActivateExecutiveUnit.cpp \
-    ControlSystem.cpp \
-    DeactivateExecutiveUnit.cpp \
-    DecSensorLight.cpp \
-    DecSensorRadiation.cpp \
-    DecSensorTemperature.cpp \
-    DecSensorWet.cpp \
-    DecoratorSensorUnit.cpp \
-    Detail.cpp \
-    EUnitHandCreator.cpp \
-    EUnitSprayCreator.cpp \
-    ExecutiveUnitHand.cpp \
-    ExecutiveUnitSpray.cpp \
-    FacadeSystem.cpp \
-    MoveMovingUnit.cpp \
-    MovingUnit.cpp \
-    Robot.cpp \
-    RobotSystem.cpp \
-    ScanSensorUnit.cpp \
-    SensorUnit.cpp \
-    SetPressureSensor.cpp \
     dialogaddrobot.cpp \
     main.cpp \
-    mainwindowapp.cpp
+    mainwindowapp.cpp \
+    src/ActivateExecutiveUnit.cpp \
+    src/ControlSystem.cpp \
+    src/DeactivateExecutiveUnit.cpp \
+    src/DecSensorLight.cpp \
+    src/DecSensorRadiation.cpp \
+    src/DecSensorTemperature.cpp \
+    src/DecSensorWet.cpp \
+    src/DecoratorSensorUnit.cpp \
+    src/Detail.cpp \
+    src/EUnitHandCreator.cpp \
+    src/EUnitSprayCreator.cpp \
+    src/ExecutiveUnitHand.cpp \
+    src/ExecutiveUnitSpray.cpp \
+    src/FacadeSystem.cpp \
+    src/MoveMovingUnit.cpp \
+    src/MovingUnit.cpp \
+    src/Robot.cpp \
+    src/RobotSystem.cpp \
+    src/ScanSensorUnit.cpp \
+    src/SensorUnit.cpp \
+    src/SetPressureSensor.cpp
 
 HEADERS += \
-    ActivateExecutiveUnit.h \
-    ControlSystem.h \
-    DeactivateExecutiveUnit.h \
-    DecSensorLight.h \
-    DecSensorRadiation.h \
-    DecSensorTemperature.h \
-    DecSensorWet.h \
-    DecoratorSensorUnit.h \
-    Detail.h \
-    EUnitCreator.h \
-    EUnitHandCreator.h \
-    EUnitSprayCreator.h \
-    ExecutiveUnit.h \
-    ExecutiveUnitHand.h \
-    ExecutiveUnitSpray.h \
-    FacadeSystem.h \
-    IRobot.h \
-    ISensorUnit.h \
-    MoveMovingUnit.h \
-    MovingUnit.h \
-    ProgramUnit.h \
-    Robot.h \
-    RobotSystem.h \
-    ScanSensorUnit.h \
-    SensorUnit.h \
-    SetPressureSensor.h \
     dialogaddrobot.h \
-    mainwindowapp.h
+    mainwindowapp.h \
+    src/ActivateExecutiveUnit.h \
+    src/ControlSystem.h \
+    src/DeactivateExecutiveUnit.h \
+    src/DecSensorLight.h \
+    src/DecSensorRadiation.h \
+    src/DecSensorTemperature.h \
+    src/DecSensorWet.h \
+    src/DecoratorSensorUnit.h \
+    src/Detail.h \
+    src/EUnitCreator.h \
+    src/EUnitHandCreator.h \
+    src/EUnitSprayCreator.h \
+    src/ExecutiveUnit.h \
+    src/ExecutiveUnitHand.h \
+    src/ExecutiveUnitSpray.h \
+    src/FacadeSystem.h \
+    src/IRobot.h \
+    src/ISensorUnit.h \
+    src/MoveMovingUnit.h \
+    src/MovingUnit.h \
+    src/ProgramUnit.h \
+    src/Robot.h \
+    src/RobotSystem.h \
+    src/ScanSensorUnit.h \
+    src/SensorUnit.h \
+    src/SetPressureSensor.h
 
 FORMS += \
     dialogaddrobot.ui \
