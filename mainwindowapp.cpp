@@ -18,6 +18,7 @@ MainWindowApp::MainWindowApp(QWidget *parent)
 
 MainWindowApp::~MainWindowApp()
 {
+
     delete ui;
 }
 

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "dialogaddrobot.h"
+
 #include "src/FacadeSystem.h"
 
 QT_BEGIN_NAMESPACE
