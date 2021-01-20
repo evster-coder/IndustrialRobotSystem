@@ -1,4 +1,5 @@
 #pragma once
+#include <QStringList>
 #include "ControlSystem.h"
 #include "ExecutiveUnit.h"
 #include "RobotSystem.h"
@@ -58,4 +59,8 @@ public:
 
 	//печать информации о системе
 	void printSystemInfo();
+
+    //получение имен всех роботов системы
+    QStringList getAllRobots();
+
 };

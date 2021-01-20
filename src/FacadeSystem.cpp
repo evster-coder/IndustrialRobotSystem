@@ -189,3 +189,15 @@ void FacadeSystem::printSystemInfo()
 	cout << "##################" << endl;
 	cout << endl;
 }
+
+QStringList FacadeSystem::getAllRobots()
+{
+    QStringList robotNames;
+    //получаем всех роботов
+    map<string, IRobot*> robots = systemObj.getRobotMap();
+
+    //получаем их серийные номера
+    for(auto curRobot = robots.begin(); curRobot != robots.end(); ++curRobot)
+        robotNames.push_back(QString::fromStdString(curRobot->first));
+    return robotNames;
+}

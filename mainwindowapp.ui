@@ -20,14 +20,14 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="labelListRobots">
           <property name="text">
            <string>Список роботов в системе</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="listView"/>
+         <widget class="QListWidget" name="listViewAllRobots"/>
         </item>
        </layout>
       </item>

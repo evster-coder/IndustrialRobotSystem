@@ -2,6 +2,7 @@
 #define MAINWINDOWAPP_H
 
 #include <QMainWindow>
+#include <QVector>
 
 #include "dialogaddrobot.h"
 
@@ -19,6 +20,9 @@ class MainWindowApp : public QMainWindow
 public:
     MainWindowApp(QWidget *parent = nullptr);
     ~MainWindowApp();
+
+    //обновление списка роботов
+    void refreshRobotsList();
 
 private slots:
     //вызов окна внесения нового робота в систему
