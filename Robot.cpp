@@ -1,4 +1,9 @@
 #include "Robot.h"
+#include "DecSensorLight.h"
+#include "DecSensorRadiation.h"
+#include "DecSensorTemperature.h"
+#include "DecSensorWet.h"
+
 #include <vector>
 
 using namespace std;
@@ -23,6 +28,20 @@ Robot::~Robot()
 	delete sensorDevice;
 	for (int i = 0; i < int(commands.size()); i++)
 		delete commands[i];
+}
+
+void Robot::addNewSensor(string sensor)
+{
+    ISensorUnit* sensorC = sensorDevice;
+    if (sensor == "Light")
+        sensorC = new DecSensorLight(sensorDevice);
+    else if (sensor == "Wet")
+        sensorC = new DecSensorWet(sensorDevice);
+    else if (sensor == "Radiation")
+        sensorC = new DecSensorRadiation(sensorDevice);
+    else if (sensor == "Temperature")
+        sensorC = new DecSensorTemperature(sensorDevice);
+    sensorDevice = sensorC;
 }
 
 void Robot::turnOn()

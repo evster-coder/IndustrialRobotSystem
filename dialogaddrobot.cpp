@@ -33,7 +33,7 @@ void DialogAddRobot::closeWindow()
 
 void DialogAddRobot::addRobot()
 {
-    //занесение робота в систему
+    //создание рабочего органа робота
     ExecutiveUnit* item;
     switch(ui->comboBoxExecutiveUnit->currentIndex())
     {
@@ -48,12 +48,24 @@ void DialogAddRobot::addRobot()
         break;
     }
 
+    //создание робота в системе
     IRobot* robot = FacadeSystem::getInstance()
-            ->pushRobot(ui->lineSerialNumber->text().toStdString(),
-                        item, new SensorUnit(ui->lineRobotCapacity->text().toDouble()),
-                        ui->doubleSpinBoxPosX->value(), ui->doubleSpinBoxPosY->value(), ui->doubleSpinBoxPosZ->value(),
-                        ui->doubleSpinBoxRangeX->value(), ui->doubleSpinBoxRangeY->value(), ui->doubleSpinBoxRangeZ->value()
-                        );
+          ->pushRobot(ui->lineSerialNumber->text().toStdString(),
+                     item, new SensorUnit(ui->lineRobotCapacity->text().toDouble()),
+                     ui->doubleSpinBoxPosX->value(), ui->doubleSpinBoxPosY->value(), ui->doubleSpinBoxPosZ->value(),
+                     ui->doubleSpinBoxRangeX->value(), ui->doubleSpinBoxRangeY->value(), ui->doubleSpinBoxRangeZ->value()
+                     );
+
+    //установка дополнительных сенсоров
+    if(ui->checkBoxWet->isChecked())
+        robot->addNewSensor("Wet");
+    if(ui->checkBoxLight->isChecked())
+        robot->addNewSensor("Light");
+    if(ui->checkBoxRadiation->isChecked())
+        robot->addNewSensor("Radiation");
+    if(ui->checkBoxTemperature->isChecked())
+        robot->addNewSensor("Temperature");
+
     //закрытие окна
     this->close();
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
+    <width>589</width>
     <height>367</height>
    </rect>
   </property>
@@ -129,13 +129,25 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
-            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeX"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeX">
+             <property name="maximum">
+              <double>99999.990000000005239</double>
+             </property>
+            </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeY"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeY">
+             <property name="maximum">
+              <double>99999.990000000005239</double>
+             </property>
+            </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeZ"/>
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxRangeZ">
+             <property name="maximum">
+              <double>99999.990000000005239</double>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -144,24 +156,64 @@
       </layout>
      </item>
      <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
-          <string>Положение в системе</string>
+          <string>Координаты в системе</string>
          </property>
         </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosX"/>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosX">
+           <property name="minimum">
+            <double>-99999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosY"/>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosY">
+           <property name="minimum">
+            <double>-99999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosZ"/>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxPosZ">
+           <property name="minimum">
+            <double>-99999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -203,6 +255,12 @@
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="title">
         <string>Дополнительные сенсоры</string>
        </property>

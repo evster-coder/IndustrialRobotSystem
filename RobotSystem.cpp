@@ -18,6 +18,10 @@ RobotSystem::~RobotSystem()
 	delete robot;
 }
 
+void RobotSystem::addNewSensor(string sensor)
+{
+    robot->addNewSensor(sensor);
+}
 
 void RobotSystem::turnOn()
 {

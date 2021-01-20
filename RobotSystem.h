@@ -26,6 +26,9 @@ public:
 	
 	~RobotSystem();
 
+    //добавление нового сенсора роботу
+    virtual void addNewSensor(string sensor);
+
 	//Включение робота
 	virtual void turnOn();
 

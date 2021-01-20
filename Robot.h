@@ -52,6 +52,8 @@ public:
 
     ~Robot();
 
+    //добавление нового сенсора
+    virtual void addNewSensor(string sensor);
 
 	//Включение робота
 	virtual void turnOn();

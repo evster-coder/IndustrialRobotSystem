@@ -30,6 +30,9 @@ public:
 	//Получение исправности робота
 	virtual bool getServiceable() = 0;
 
+    //добавление нового сенсора
+    virtual void addNewSensor(string sensor) = 0;
+
 
 	//Передвинуть исполнительный орган робота в позицию
 	//(x; y; z) мм со скоростью speed мм / сек
