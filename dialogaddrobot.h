@@ -2,6 +2,8 @@
 #define DIALOGADDROBOT_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include "FacadeSystem.h"
 
 namespace Ui {
 class DialogAddRobot;
@@ -14,6 +16,13 @@ class DialogAddRobot : public QDialog
 public:
     explicit DialogAddRobot(QWidget *parent = nullptr);
     ~DialogAddRobot();
+
+private slots:
+    //Добавить робота
+    void addRobot();
+
+    //закрыть окно
+    void closeWindow();
 
 private:
     Ui::DialogAddRobot *ui;

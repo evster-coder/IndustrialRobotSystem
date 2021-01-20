@@ -24,7 +24,7 @@ MainWindowApp::~MainWindowApp()
 void MainWindowApp::addNewRobotDialog()
 {
     DialogAddRobot *win = new DialogAddRobot(this);
+    win->setModal(true);
     win->show();
-    QMessageBox::warning(this, "hello", "how are u?");
 }
 
