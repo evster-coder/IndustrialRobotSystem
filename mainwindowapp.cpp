@@ -28,6 +28,7 @@ MainWindowApp::MainWindowApp(QWidget *parent)
     connect(ui->buttonMakeCommandsOnetoanother, SIGNAL(clicked()), this, SLOT(makeCommandsOneToAnother()));
     connect(ui->buttonMakeCommandsConsistently, SIGNAL(clicked()), this, SLOT(makeCommandsConsistently()));
     connect(ui->buttonMakeCommandsParallel, SIGNAL(clicked()), this, SLOT(makeCommandsParallel()));
+    connect(ui->buttonClearOutput, SIGNAL(clicked()), this, SLOT(clearOutputLine()));
 }
 
 MainWindowApp::~MainWindowApp()
@@ -38,6 +39,10 @@ MainWindowApp::~MainWindowApp()
 
 void MainWindowApp::makeCommandsOneToAnother()
 {
+    ui->listWidgetResult->addItem("");
+    ui->listWidgetResult->addItem("Command processing started in One to another mode");
+    ui->listWidgetResult->addItem("");
+
     QMessageBox::information(this, "Система", "Началась обработка команд одна за одной");
 
     QEventLoop loop;
@@ -58,12 +63,17 @@ void MainWindowApp::makeCommandsOneToAnother()
 
     turnOnButtons();
 
+    ui->listWidgetResult->addItem("");
     ui->listWidgetResult->addItems(resultOut);
 
 }
 
 void MainWindowApp::makeCommandsConsistently()
 {
+    ui->listWidgetResult->addItem("");
+    ui->listWidgetResult->addItem("Command processing started consistently");
+    ui->listWidgetResult->addItem("");
+
     QMessageBox::information(this, "Система", "Началась обработка команд последовательно");
 
     QEventLoop loop;
@@ -84,12 +94,17 @@ void MainWindowApp::makeCommandsConsistently()
 
     turnOnButtons();
 
+    ui->listWidgetResult->addItem("");
     ui->listWidgetResult->addItems(resultOut);
 
 }
 
 void MainWindowApp::makeCommandsParallel()
 {
+    ui->listWidgetResult->addItem("");
+    ui->listWidgetResult->addItem("Command processing started in parallel");
+    ui->listWidgetResult->addItem("");
+
     QMessageBox::information(this, "Система", "Началась обработка команд параллельно");
 
     QEventLoop loop;
@@ -110,6 +125,7 @@ void MainWindowApp::makeCommandsParallel()
 
     turnOnButtons();
 
+    ui->listWidgetResult->addItem("");
     ui->listWidgetResult->addItems(resultOut);
 }
 
@@ -216,7 +232,10 @@ void MainWindowApp::addNewCommand()
             QRegExp expInt ("^[0-9]+");
 
             if(expInt.exactMatch(commandText))
+            {
                 selectedRobot->activateExecutiveUnit(commandText.toInt());
+                ui->lineEditNewCommand->clear();
+            }
             else
                 QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + activateExecutiveUnitCommand);
         }
@@ -225,7 +244,10 @@ void MainWindowApp::addNewCommand()
         else if ((pos = expDeact.indexIn(commandText)) != -1)
         {
             if(commandText == deactivateExecutiveUnitCommand)
+            {
                 selectedRobot->deactivateExecutiveUnit();
+                ui->lineEditNewCommand->clear();
+            }
             else
                 QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + deactivateExecutiveUnitCommand);
         }
@@ -249,6 +271,7 @@ void MainWindowApp::addNewCommand()
                             mass[1].toDouble(),
                             mass[2].toDouble(),
                             mass[3].toDouble());
+                    ui->lineEditNewCommand->clear();
             }
             else
                 QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + moveMovingUnitCommand);
@@ -258,7 +281,10 @@ void MainWindowApp::addNewCommand()
         else if ((pos = expAnali.indexIn(commandText)) != -1)
         {
             if(commandText == analizeDetailAreaCommand)
+            {
                 selectedRobot->analizeDetailArea();
+                ui->lineEditNewCommand->clear();
+            }
             else
                 QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + analizeDetailAreaCommand);
         }
@@ -273,7 +299,10 @@ void MainWindowApp::addNewCommand()
             QRegExp expDouble ("^(0|([1-9][0-9]*))(\\.[0-9]+)?$");
 
             if(expDouble.exactMatch(commandText))
+            {
                 selectedRobot->setPressureSensor(commandText.toDouble());
+                ui->lineEditNewCommand->clear();
+            }
             else
                 QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + setPressureSensorCommand);
         }
@@ -346,6 +375,10 @@ void MainWindowApp::eraseRobotDialog()
     refreshRobotsList();
 }
 
+void MainWindowApp::clearOutputLine()
+{
+    ui->listWidgetResult->clear();
+}
 
 void MainWindowApp::turnOffButtons()
 {

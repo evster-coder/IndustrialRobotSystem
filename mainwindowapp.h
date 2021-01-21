@@ -68,6 +68,9 @@ private slots:
     //выполнение команд последовательно
     void makeCommandsConsistently();
 
+    //очистка консоли вывода
+    void clearOutputLine();
+
 private:
     Ui::MainWindowApp *ui;
     FacadeSystem *system;
