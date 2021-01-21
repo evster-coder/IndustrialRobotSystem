@@ -6,7 +6,8 @@ DialogAddRobot::DialogAddRobot(QWidget *parent) :
     ui(new Ui::DialogAddRobot)
 {
     ui->setupUi(this);
-    ui->lineRobotCapacity->setValidator(new QDoubleValidator(ui->lineRobotCapacity));
+    QRegExp expDouble ("^(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    ui->lineRobotCapacity->setValidator(new QRegExpValidator(expDouble, this));
 
     //постоянный размер окна
     this->setFixedSize(this->size());
