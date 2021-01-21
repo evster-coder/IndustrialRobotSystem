@@ -17,6 +17,10 @@ MainWindowApp::MainWindowApp(QWidget *parent)
     //соединяем слоты с элементами ui
     connect(ui->actionAddRobot, SIGNAL(triggered()), this, SLOT(addNewRobotDialog()));
     connect(ui->actionEraseRobot, SIGNAL(triggered()), this, SLOT(eraseRobotDialog()));
+    connect(ui->listViewAllRobots, SIGNAL(itemSelectionChanged()), this, SLOT(showRobotInfo()), Qt::QueuedConnection);
+    connect(ui->buttonTurnOn, SIGNAL(clicked()), this, SLOT(turnRobotOn()));
+    connect(ui->buttonTurnOff, SIGNAL(clicked()), this, SLOT(turnRobotOff()));
+    connect(ui->buttonEraseCommand, SIGNAL(clicked()), this, SLOT(eraseCommand));
 }
 
 MainWindowApp::~MainWindowApp()
@@ -31,6 +35,76 @@ void MainWindowApp::refreshRobotsList()
     //получение списка имен
     ui->listViewAllRobots->addItems(system->getAllRobots());
 }
+
+void MainWindowApp::showRobotInfo()
+{
+    ui->textRobotStat->clear();
+    ui->commandsList->clear();
+    //если что-то выбрано
+    if(ui->listViewAllRobots->currentItem())
+    {
+        //получаем робота с выделенным номером
+        IRobot* curSelect = system->getRobot(ui->listViewAllRobots->currentItem()->text().toStdString());
+
+        //печать информации о роботе
+        vector<string> info = curSelect->getRobotInfo();
+        QString outputText = "";
+        for(int i = 0; i < int(info.size()); i++)
+            outputText += QString::fromStdString(info[i]) + "\n";
+        ui->textRobotStat->setText(outputText);
+
+        //печать списка команд робота
+        vector<string> *commands = curSelect->showCommands();
+        if(commands != nullptr)
+        {
+            int amountCommand = commands->size();
+            for(int i = 0; i < amountCommand; i++)
+            {
+                ui->commandsList->addItem(QString::fromStdString(commands->at(i)));
+            }
+        }
+        else
+            ui->commandsList->addItem(emptyCommands);
+    }
+}
+
+void MainWindowApp::turnRobotOn()
+{
+    if(ui->listViewAllRobots->currentItem())
+    {
+        //получаем робота
+        IRobot* curRobot = system->getRobot(ui->listViewAllRobots->currentItem()->text().toStdString());
+        if(curRobot == nullptr)
+            return;
+
+        //включаем его
+        curRobot->turnOn();
+        QMessageBox::information(this, "Информация о роботе", "Робот успешно включен");
+        ui->listViewAllRobots->clearSelection();
+    }
+}
+
+void MainWindowApp::turnRobotOff()
+{
+    if(ui->listViewAllRobots->currentItem())
+    {
+        //получаем робота
+        IRobot* curRobot = system->getRobot(ui->listViewAllRobots->currentItem()->text().toStdString());
+        if(curRobot == nullptr)
+            return;
+
+        //выключаем его
+        curRobot->turnOff();
+        QMessageBox::information(this, "Информация о роботе", "Робот успешно отключен");
+        ui->listViewAllRobots->clearSelection();
+    }
+}
+
+void MainWindowApp::eraseCommand()
+{
+
+}
+
 
 void MainWindowApp::addNewRobotDialog()
 {

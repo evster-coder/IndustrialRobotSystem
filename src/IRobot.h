@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "QThread"
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -16,6 +17,8 @@ public:
 
 	//Отключение робота
 	virtual void turnOff() = 0;
+
+    virtual bool isRobotOn() = 0;
 
 	//получение серийного номера (идентификатора робота)
 	virtual string getSerialNumber() = 0;
@@ -65,5 +68,8 @@ public:
 
 	//удаление команды по индексу
 	virtual bool undoCommand(int index) = 0;
+
+    //выдача информации о роботе
+    virtual vector<string> getRobotInfo() = 0;
 
 };

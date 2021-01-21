@@ -32,8 +32,21 @@ private slots:
     //вызов окна удаления робота из системы
     void eraseRobotDialog();
 
+    //печать информации о роботе и его команды
+    void showRobotInfo();
+
+    //включение выделенного робота
+    void turnRobotOn();
+
+    //отключение выделенного робота
+    void turnRobotOff();
+
+    //удаление выделенной команды
+    void eraseCommand();
+
 private:
     Ui::MainWindowApp *ui;
     FacadeSystem *system;
+    const QString emptyCommands = "Команды отсутствуют";
 };
 #endif // MAINWINDOWAPP_H

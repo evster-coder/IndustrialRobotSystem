@@ -88,3 +88,8 @@ bool ExecutiveUnitHand::deactiveUnit()
 	isActive = false;
 	return true;
 }
+
+string ExecutiveUnitHand::getEUnitType()
+{
+    return "Executive Unit Hand";
+}

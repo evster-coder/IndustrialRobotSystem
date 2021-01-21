@@ -8,7 +8,7 @@ class RobotSystem : public IRobot
 {
 private:
 	//Указатель на реальный объект робота
-	IRobot* robot;
+    Robot* robot;
 	
 	//Координаты робота в системе
 	double xSystemCoord, ySystemCoord, zSystemCoord;
@@ -34,6 +34,9 @@ public:
 
 	//Отключение робота
 	virtual void turnOff();
+
+    //включен ли робот
+    virtual bool isRobotOn();
 
 	//получение серийного номера (идентификатора робота)
 	virtual string getSerialNumber();
@@ -81,4 +84,8 @@ public:
 
 	//удаление комманды по индексу
 	virtual bool undoCommand(int index);
+
+    //выдача информации о роботе
+    virtual vector<string> getRobotInfo();
+
 };

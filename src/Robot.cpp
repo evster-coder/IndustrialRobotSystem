@@ -62,6 +62,11 @@ void Robot::turnOff()
 	}
 }
 
+bool Robot::isRobotOn()
+{
+    return isOn;
+}
+
 
 void Robot::setServiceable(bool isWorkable)
 {
@@ -211,4 +216,44 @@ bool Robot::undoCommand(int index)
 	else
 		return false;
 	return true;
+}
+
+vector<string> Robot::getRobotInfo()
+{
+    vector<string> info;
+    //форматирование double
+    std::ostringstream streamObjX;
+    streamObjX << std::fixed;
+    streamObjX << std::setprecision(3);
+    streamObjX << movingDevice->getXMoveRange();
+
+    std::ostringstream streamObjY;
+    streamObjY << std::fixed;
+    streamObjY << std::setprecision(3);
+    streamObjY << movingDevice->getYMoveRange();
+
+    std::ostringstream streamObjZ;
+    streamObjZ << std::fixed;
+    streamObjZ << std::setprecision(3);
+    streamObjZ << movingDevice->getZMoveRange();
+
+    info.push_back("Serial Number: " + getSerialNumber());
+    info.push_back("Is Robot on: " + string((isOn ? "true" : "false")));
+    info.push_back("Serviceable status: "+ string((isServiceable ? "true" : "false")));
+    info.push_back("Robot capacity: " + to_string(sensorDevice->getCapacity()));
+    info.push_back("Executive unit type: " + executiveDevice->getEUnitType());
+    info.push_back("Ex. unit move Range:" + streamObjX.str() + "; "
+                                          + streamObjY.str() + "; "
+                                          + streamObjZ.str() );
+    return info;
+}
+
+double* Robot::getCurrentPos()
+{
+    //x y и z текущий координаты робота
+    double* position = new double[3];
+    position[0] = movingDevice->getPositionX();
+    position[1] = movingDevice->getPositionY();
+    position[2] = movingDevice->getPositionZ();
+    return position;
 }

@@ -33,6 +33,10 @@ void RobotSystem::turnOff()
 	robot->turnOff();
 }
 
+bool RobotSystem::isRobotOn()
+{
+    return robot->isRobotOn();
+}
 
 void RobotSystem::setServiceable(bool isWorkable)
 {
@@ -109,4 +113,34 @@ vector<string>* RobotSystem::showCommands()
 bool RobotSystem::undoCommand(int index)
 {
 	return robot->undoCommand(index);
+}
+
+vector<string> RobotSystem::getRobotInfo()
+{
+    vector<string> info = robot->getRobotInfo();
+
+    double *pos = robot->getCurrentPos();
+
+    //форматирование double
+    std::ostringstream streamObjX;
+    streamObjX << std::fixed;
+    streamObjX << std::setprecision(3);
+    streamObjX << xSystemCoord + pos[0];
+
+    std::ostringstream streamObjY;
+    streamObjY << std::fixed;
+    streamObjY << std::setprecision(3);
+    streamObjY << ySystemCoord + pos[1];
+
+    std::ostringstream streamObjZ;
+    streamObjZ << std::fixed;
+    streamObjZ << std::setprecision(3);
+    streamObjZ << zSystemCoord + pos[2];
+
+    //добавление текущей позиции робота
+    info.push_back("Position: "
+                   + streamObjX.str() + "; "
+                   + streamObjY.str() + "; "
+                   + streamObjZ.str());
+    return info;
 }

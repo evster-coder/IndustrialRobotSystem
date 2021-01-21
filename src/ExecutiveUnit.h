@@ -28,4 +28,7 @@ public:
 
 	//Установить ссылку на сенсорное устройство
 	virtual void setSensor(ISensorUnit* sensorDevice) = 0;
+
+    //возвращает наименование типа устройства
+    virtual string getEUnitType() = 0;
 };

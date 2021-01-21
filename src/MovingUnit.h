@@ -25,4 +25,12 @@ public:
 	//(x; y; z) мм со скоростью speed мм/сек
     string* moveDevice(double x, double y, double z, double speed);
 
+    double getPositionX();
+    double getPositionY();
+    double getPositionZ();
+
+    double getXMoveRange();
+    double getYMoveRange();
+    double getZMoveRange();
+
 };

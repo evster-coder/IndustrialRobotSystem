@@ -61,6 +61,9 @@ public:
 	//Отключение робота
 	virtual void turnOff();
 
+    //включен ли робот
+    virtual bool isRobotOn();
+
 	//получение серийного номера (идентификатора робота)
 	virtual string getSerialNumber();
 
@@ -72,6 +75,9 @@ public:
 
 	//Получение исправности робота
 	virtual bool getServiceable();
+
+    //получение координат робота
+    double* getCurrentPos();
 
 
 	//Передвинуть исполнительный орган робота в позицию
@@ -107,4 +113,8 @@ public:
 
 	//удаление комманды по индексу
 	virtual bool undoCommand(int index);
+
+    //выдача информации о роботе
+    virtual vector<string> getRobotInfo();
+
 };

@@ -127,3 +127,30 @@ string* MovingUnit::moveDevice(double x, double y, double z, double speed)
 
     return executeResult;
 }
+
+double MovingUnit::getPositionX()
+{
+    return positionX;
+}
+
+double MovingUnit::getPositionY()
+{
+    return positionY;
+}
+double MovingUnit::getPositionZ()
+{
+    return positionZ;
+}
+
+double MovingUnit::getXMoveRange()
+{
+    return xMoveRange;
+}
+double MovingUnit::getYMoveRange()
+{
+    return yMoveRange;
+}
+double MovingUnit::getZMoveRange()
+{
+    return zMoveRange;
+}

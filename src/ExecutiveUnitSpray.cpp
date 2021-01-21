@@ -52,3 +52,8 @@ void ExecutiveUnitSpray::setSensor(ISensorUnit* sensorDevice)
 {
 	sensor = sensorDevice;
 }
+
+string ExecutiveUnitSpray::getEUnitType()
+{
+    return "Executive Unit Spray";
+}
