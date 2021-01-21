@@ -110,7 +110,7 @@ string* ControlSystem::executeOneToAnother()
 		//Проход по каждому роботу и выполнение им одной команды
 		for (auto curRobot = robots.begin(); curRobot != robots.end(); ++curRobot)
 		{
-			if (curRobot->second->isCommandsEmpty() == false)
+            if (curRobot->second->isCommandsEmpty() == false && curRobot->second->isRobotOn())
 			{
 				flagIsFinish = false;
                 future = QtConcurrent::run(this, &ControlSystem::executeRobotOneCommand, curRobot->first);

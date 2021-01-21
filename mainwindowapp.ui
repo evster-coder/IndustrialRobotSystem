@@ -152,7 +152,7 @@
          <number>10</number>
         </property>
         <item>
-         <widget class="QPushButton" name="buttonMakeCommandParallel_2">
+         <widget class="QPushButton" name="buttonMakeCommandsParallel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -165,7 +165,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMakeCommandConsistently">
+         <widget class="QPushButton" name="buttonMakeCommandsConsistently">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -178,7 +178,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMakeCommandOnetoanother">
+         <widget class="QPushButton" name="buttonMakeCommandsOnetoanother">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -218,12 +218,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="listViewResult">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QListWidget" name="listWidgetResult">
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
           </property>
          </widget>
         </item>

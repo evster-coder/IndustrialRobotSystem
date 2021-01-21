@@ -46,13 +46,13 @@ public:
 	bool eraseRobot(string serialNumb);
 
 	//выполнение работы системы последовательно
-    void performAllConsistently();
+    QStringList performAllConsistently();
 
     //выполнение работы системы шаг за шагом
-    void performAllOneToAnother();
+    QStringList performAllOneToAnother();
 
 	//выполнение работы системы параллельно
-    void performAllParallel();
+    QStringList performAllParallel();
 
 	//получение робота по его серийному номеру
 	IRobot* getRobot(string serialNumb);

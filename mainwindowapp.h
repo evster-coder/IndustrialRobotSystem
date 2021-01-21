@@ -25,6 +25,10 @@ public:
     //обновление списка роботов
     void refreshRobotsList();
 
+    void turnOffButtons();
+
+    void turnOnButtons();
+
 private slots:
     //вызов окна внесения нового робота в систему
     void addNewRobotDialog();
@@ -46,6 +50,15 @@ private slots:
 
     //добавление новой команды из lineEdit
     void addNewCommand();
+
+    //выполнение команд шаг за шагом (по одной у каждого робота, пока все не выполнятся)
+    void makeCommandsOneToAnother();
+
+    //выполнение команд параллельно
+    void makeCommandsParallel();
+
+    //выполнение команд последовательно
+    void makeCommandsConsistently();
 
 private:
     Ui::MainWindowApp *ui;

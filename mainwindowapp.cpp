@@ -3,6 +3,10 @@
 
 #include "QMessageBox"
 #include <QRegExp>
+#include "QFuture"
+#include "QFutureWatcher"
+#include "QtConcurrent/QtConcurrent"
+
 
 MainWindowApp::MainWindowApp(QWidget *parent)
     : QMainWindow(parent)
@@ -23,11 +27,93 @@ MainWindowApp::MainWindowApp(QWidget *parent)
     connect(ui->buttonTurnOff, SIGNAL(clicked()), this, SLOT(turnRobotOff()));
     connect(ui->buttonEraseCommand, SIGNAL(clicked()), this, SLOT(eraseCommand()));
     connect(ui->buttonAddCommand, SIGNAL(clicked()), this, SLOT(addNewCommand()));
+
+    connect(ui->buttonMakeCommandsOnetoanother, SIGNAL(clicked()), this, SLOT(makeCommandsOneToAnother()));
+    connect(ui->buttonMakeCommandsConsistently, SIGNAL(clicked()), this, SLOT(makeCommandsConsistently()));
+    connect(ui->buttonMakeCommandsParallel, SIGNAL(clicked()), this, SLOT(makeCommandsParallel()));
 }
 
 MainWindowApp::~MainWindowApp()
 {
     delete ui;
+}
+
+
+void MainWindowApp::makeCommandsOneToAnother()
+{
+    QMessageBox::information(this, "Система", "Началась обработка команд одна за одной");
+
+    QEventLoop loop;
+    QFutureWatcher<QStringList> watcher;
+    connect(&watcher, &QFutureWatcher<QStringList>::finished,  &loop, &QEventLoop::quit);
+
+    QFuture<QStringList> future = QtConcurrent::run(system, &FacadeSystem::performAllOneToAnother);
+    watcher.setFuture(future);
+
+    turnOffButtons();
+
+    //выполнение цикла
+    loop.exec();
+    //получение результата
+    auto resultOut = watcher.result();
+
+    QMessageBox::information(this, "Система", "Обработка завершена");
+
+    turnOnButtons();
+
+    ui->listWidgetResult->addItems(resultOut);
+
+}
+
+void MainWindowApp::makeCommandsConsistently()
+{
+    QMessageBox::information(this, "Система", "Началась обработка команд последовательно");
+
+    QEventLoop loop;
+    QFutureWatcher<QStringList> watcher;
+    connect(&watcher, &QFutureWatcher<QStringList>::finished,  &loop, &QEventLoop::quit);
+
+    QFuture<QStringList> future = QtConcurrent::run(system, &FacadeSystem::performAllConsistently);
+    watcher.setFuture(future);
+
+    turnOffButtons();
+
+    //выполнение цикла
+    loop.exec();
+    //получение результата
+    auto resultOut = watcher.result();
+
+    QMessageBox::information(this, "Система", "Обработка завершена");
+
+    turnOnButtons();
+
+    ui->listWidgetResult->addItems(resultOut);
+
+}
+
+void MainWindowApp::makeCommandsParallel()
+{
+    QMessageBox::information(this, "Система", "Началась обработка команд параллельно");
+
+    QEventLoop loop;
+    QFutureWatcher<QStringList> watcher;
+    connect(&watcher, &QFutureWatcher<QStringList>::finished,  &loop, &QEventLoop::quit);
+
+    QFuture<QStringList> future = QtConcurrent::run(system, &FacadeSystem::performAllParallel);
+    watcher.setFuture(future);
+
+    turnOffButtons();
+
+    //выполнение цикла
+    loop.exec();
+    //получение результата
+    auto resultOut = watcher.result();
+
+    QMessageBox::information(this, "Система", "Обработка завершена");
+
+    turnOnButtons();
+
+    ui->listWidgetResult->addItems(resultOut);
 }
 
 void MainWindowApp::refreshRobotsList()
@@ -263,4 +349,26 @@ void MainWindowApp::eraseRobotDialog()
     refreshRobotsList();
 }
 
+
+void MainWindowApp::turnOffButtons()
+{
+    ui->buttonTurnOn->setEnabled(false);
+    ui->buttonTurnOff->setEnabled(false);
+    ui->buttonAddCommand->setEnabled(false);
+    ui->buttonEraseCommand->setEnabled(false);
+    ui->buttonMakeCommandsParallel->setEnabled(false);
+    ui->buttonMakeCommandsConsistently->setEnabled(false);
+    ui->buttonMakeCommandsOnetoanother->setEnabled(false);
+}
+
+void MainWindowApp::turnOnButtons()
+{
+    ui->buttonTurnOn->setEnabled(true);
+    ui->buttonTurnOff->setEnabled(true);
+    ui->buttonAddCommand->setEnabled(true);
+    ui->buttonEraseCommand->setEnabled(true);
+    ui->buttonMakeCommandsParallel->setEnabled(true);
+    ui->buttonMakeCommandsConsistently->setEnabled(true);
+    ui->buttonMakeCommandsOnetoanother->setEnabled(true);
+}
 

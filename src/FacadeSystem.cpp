@@ -82,52 +82,66 @@ bool FacadeSystem::eraseRobot(string serialNumb)
     return systemObj.eraseRobot(serialNumb);
 }
 
-void FacadeSystem::performAllConsistently()
+QStringList FacadeSystem::performAllConsistently()
 {
+    QStringList outInfo;
     string* systemResult = systemObj.executeOnebyone();
     if(systemResult == nullptr)
 	{
-		cout << "All operations performed in series completed successfully" << endl;
+        outInfo.push_back("All operations performed in series completed successfully");
 	}
 	else
 	{
-		cout << "Failed to complete all operations in series" << endl;
-        cout << "Errors on:" << endl;
-        cout << "Robot num. " << systemResult[0] << ": message: " << systemResult[1] << endl;
+        outInfo.push_back("Failed to complete all operations in series");
+        outInfo.push_back("Errors on:");
+        outInfo.push_back("Robot num. " + QString::fromStdString(systemResult[0])
+                + ": message: " + QString::fromStdString(systemResult[1]));
 	}
+
+    return outInfo;
 }
 
-void FacadeSystem::performAllOneToAnother()
+QStringList FacadeSystem::performAllOneToAnother()
 {
+    QStringList outInfo;
+
     string* systemResult = systemObj.executeOneToAnother();
     if(systemResult == nullptr)
     {
-        cout << "All operations performed one to another completed successfully" << endl;
+        outInfo.push_back("All operations performed one to another completed successfully");
     }
     else
     {
-        cout << "Failed to complete all operations one to another" << endl;
-        cout << "Errors on:" << endl;
-        cout << "Robot num. " << systemResult[0] << ": message: " << systemResult[1] << endl;
+        outInfo.push_back("Failed to complete all operations one to another");
+        outInfo.push_back("Errors on:");
+        outInfo.push_back("Robot num. " + QString::fromStdString(systemResult[0])
+                + ": message: " + QString::fromStdString(systemResult[1]));
     }
+
+    return outInfo;
 }
 
-void FacadeSystem::performAllParallel()
+QStringList FacadeSystem::performAllParallel()
 {
+    QStringList outInfo;
+
     vector<string*> commandsOutput = systemObj.executeParallel();
     if (int(commandsOutput.size()) == 0)
 	{
-		cout << "All operations performed parallel completed successfully" << endl;
+        outInfo.push_back("All operations performed parallel completed successfully");
 	}
 	else
 	{
-		cout << "Failed to complete all operations parallel" << endl;
-        cout << "Errors on:" << endl;
+        outInfo.push_back("Failed to complete all operations parallel");
+        outInfo.push_back("Errors on:");
         for(int i = 0; i < int(commandsOutput.size()); i++)
         {
-            cout << "Robot num. " << commandsOutput[i][0] << ": message: " << commandsOutput[i][1] << endl;
+            outInfo.push_back("Robot num. " + QString::fromStdString(commandsOutput[i][0])
+                    + ": message: " + QString::fromStdString(commandsOutput[i][1]));
         }
 	}
+
+    return outInfo;
 }
 
 IRobot* FacadeSystem::getRobot(string serialNumb)
