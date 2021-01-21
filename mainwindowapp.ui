@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,3,5">
+     <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="2,3,5">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
@@ -96,6 +96,20 @@
         </item>
         <item>
          <widget class="QListWidget" name="commandsList"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Код команды</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditNewCommand"/>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QSplitter" name="splitter">

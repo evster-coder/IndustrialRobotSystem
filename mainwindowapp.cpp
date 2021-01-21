@@ -2,6 +2,7 @@
 #include "ui_mainwindowapp.h"
 
 #include "QMessageBox"
+#include <QRegExp>
 
 MainWindowApp::MainWindowApp(QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +21,8 @@ MainWindowApp::MainWindowApp(QWidget *parent)
     connect(ui->listViewAllRobots, SIGNAL(itemSelectionChanged()), this, SLOT(showRobotInfo()), Qt::QueuedConnection);
     connect(ui->buttonTurnOn, SIGNAL(clicked()), this, SLOT(turnRobotOn()));
     connect(ui->buttonTurnOff, SIGNAL(clicked()), this, SLOT(turnRobotOff()));
-    connect(ui->buttonEraseCommand, SIGNAL(clicked()), this, SLOT(eraseCommand));
+    connect(ui->buttonEraseCommand, SIGNAL(clicked()), this, SLOT(eraseCommand()));
+    connect(ui->buttonAddCommand, SIGNAL(clicked()), this, SLOT(addNewCommand()));
 }
 
 MainWindowApp::~MainWindowApp()
@@ -80,7 +82,8 @@ void MainWindowApp::turnRobotOn()
         //включаем его
         curRobot->turnOn();
         QMessageBox::information(this, "Информация о роботе", "Робот успешно включен");
-        ui->listViewAllRobots->clearSelection();
+
+        showRobotInfo();
     }
 }
 
@@ -96,8 +99,115 @@ void MainWindowApp::turnRobotOff()
         //выключаем его
         curRobot->turnOff();
         QMessageBox::information(this, "Информация о роботе", "Робот успешно отключен");
-        ui->listViewAllRobots->clearSelection();
+
+        showRobotInfo();
     }
+}
+
+void MainWindowApp::addNewCommand()
+{
+    if(ui->listViewAllRobots->currentItem() == nullptr)
+        return;
+
+    //получение робота из системы
+    IRobot *selectedRobot = system->getRobot(ui->listViewAllRobots->currentItem()->text().toStdString());
+    if(selectedRobot == nullptr)
+        return;
+
+    if(ui->lineEditNewCommand->text() != "")
+    {
+        QString commandText = ui->lineEditNewCommand->text();
+
+        //формирование регулярных выражений
+        int pos = 0;
+        QRegExp expAct  ("^" + activateExecutiveUnitCommand );
+        QRegExp expDeact("^" + deactivateExecutiveUnitCommand);
+        QRegExp expMove ("^" + moveMovingUnitCommand);
+        QRegExp expAnali("^" + analizeDetailAreaCommand);
+        QRegExp expSetp ("^" + setPressureSensorCommand);
+
+        //совпадает команде активации рабочего органа
+        if ((pos = expAct.indexIn(commandText)) != -1)
+        {
+            commandText.remove(0, activateExecutiveUnitCommand.length() + 1);
+            QRegExp expInt ("^[0-9]+");
+
+            if(expInt.exactMatch(commandText))
+                selectedRobot->activateExecutiveUnit(commandText.toInt());
+            else
+                QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + activateExecutiveUnitCommand);
+        }
+
+        //совпадает команде деактивации рабочего органа
+        else if ((pos = expDeact.indexIn(commandText)) != -1)
+        {
+            if(commandText == deactivateExecutiveUnitCommand)
+                selectedRobot->deactivateExecutiveUnit();
+            else
+                QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + deactivateExecutiveUnitCommand);
+        }
+
+        //совпадает команде перемещения рабочего органа
+        else if ((pos = expMove.indexIn(commandText)) != -1)
+        {
+            //удаляем название команды и оставляем параметры
+            commandText.remove(0, moveMovingUnitCommand.length() + 1);
+
+            //параметры функции-  числа double
+            QStringList mass = commandText.split(QRegExp("\\s"));
+            QRegExp expDouble ("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+            if(mass.length() == 4
+                    && expDouble.exactMatch(mass[0])
+                    && expDouble.exactMatch(mass[1])
+                    && expDouble.exactMatch(mass[2])
+                    && expDouble.exactMatch(mass[3]))
+            {
+                    selectedRobot->moveMovingUnit(mass[0].toDouble(),
+                            mass[1].toDouble(),
+                            mass[2].toDouble(),
+                            mass[3].toDouble());
+            }
+            else
+                QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + moveMovingUnitCommand);
+        }
+
+        //совпадает команде работы сенсоров
+        else if ((pos = expAnali.indexIn(commandText)) != -1)
+        {
+            if(commandText == analizeDetailAreaCommand)
+                selectedRobot->analizeDetailArea();
+            else
+                QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + analizeDetailAreaCommand);
+        }
+
+        //совпадает команде установки давления захвата
+        else if ((pos = expSetp.indexIn(commandText)) != -1)
+        {
+            //удаляем назнвание команды и оставляем параметры
+            commandText.remove(0, setPressureSensorCommand.length() + 1);
+
+            //вычленяем параметры
+            QRegExp expDouble ("^(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+
+            if(expDouble.exactMatch(commandText))
+                selectedRobot->setPressureSensor(commandText.toDouble());
+            else
+                QMessageBox::warning(this, "Ошибка формата", "Неверный формат " + setPressureSensorCommand);
+        }
+        else
+        {
+            QString availableCommands = "Доступные команды: \n" + activateExecutiveUnitCommand + "<intensivity>\n"
+                    + deactivateExecutiveUnitCommand + "\n"
+                    + moveMovingUnitCommand + " <x> <y> <z> <speed>\n"
+                    + analizeDetailAreaCommand + "\n"
+                    + setPressureSensorCommand + " <pressure>\n";
+            QMessageBox::warning(this, "Ошибка синтаксиса", "Команда " + commandText + " не опознана. \n" + availableCommands);
+        }
+
+        showRobotInfo();
+    }
+    else
+        QMessageBox::warning(this, "Информация о команде", "Поле ввода пустое");
 }
 
 void MainWindowApp::eraseCommand()

@@ -44,9 +44,19 @@ private slots:
     //удаление выделенной команды
     void eraseCommand();
 
+    //добавление новой команды из lineEdit
+    void addNewCommand();
+
 private:
     Ui::MainWindowApp *ui;
     FacadeSystem *system;
     const QString emptyCommands = "Команды отсутствуют";
+
+    //наименование имеющихся в системе команд
+    const QString moveMovingUnitCommand = "moveMovingUnit";
+    const QString activateExecutiveUnitCommand = "activateExecutiveUnit";
+    const QString deactivateExecutiveUnitCommand = "deactivateExecutiveUnit";
+    const QString analizeDetailAreaCommand = "analizeDetailArea";
+    const QString setPressureSensorCommand = "setPressureSensor";
 };
 #endif // MAINWINDOWAPP_H
