@@ -24,7 +24,7 @@ string* MoveMovingUnit::doWork()
 
 string MoveMovingUnit::printCommand()
 {
-	string commandText = "Move executive unit to (" + to_string(x) + "; " + to_string(y) + "; " + to_string(z) +
-		") speed = " + to_string(speed);
+    string commandText = "moveMovingUnit to " + to_string(x) + "; " + to_string(y) + "; " + to_string(z) +
+        " speed " + to_string(speed);
 	return commandText;
 }

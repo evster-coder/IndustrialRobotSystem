@@ -21,6 +21,6 @@ string* ActivateExecutiveUnit::doWork()
 
 string ActivateExecutiveUnit::printCommand()
 {
-	string commandText = "Activate executive unit intence = " + to_string(intensivity);
+    string commandText = "activateExecutiveUnit intense: " + to_string(intensivity);
 	return commandText;
 }

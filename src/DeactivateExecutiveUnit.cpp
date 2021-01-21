@@ -29,6 +29,6 @@ string* DeactivateExecutiveUnit::doWork()
 
 string DeactivateExecutiveUnit::printCommand()
 {
-	string commandText = "Deactivate executive unit";
+    string commandText = "deactivateExecutiveUnit";
 	return commandText;
 }

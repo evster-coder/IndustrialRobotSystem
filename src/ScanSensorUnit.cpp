@@ -30,6 +30,6 @@ string* ScanSensorUnit::doWork()
 
 string ScanSensorUnit::printCommand()
 {
-	string commandText = "Scan detail and environment";
+    string commandText = "analizeDetailArea";
 	return commandText;
 }

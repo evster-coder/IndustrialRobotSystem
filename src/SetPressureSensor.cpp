@@ -33,6 +33,6 @@ string* SetPressureSensor::doWork()
 
 string SetPressureSensor::printCommand()
 {
-	string commandText = "Set robot pressure = " + to_string(pressure);
+    string commandText = "setPressureSensor: " + to_string(pressure);
 	return commandText;
 }

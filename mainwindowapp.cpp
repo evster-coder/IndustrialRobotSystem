@@ -367,5 +367,7 @@ void MainWindowApp::turnOnButtons()
     ui->buttonMakeCommandsParallel->setEnabled(true);
     ui->buttonMakeCommandsConsistently->setEnabled(true);
     ui->buttonMakeCommandsOnetoanother->setEnabled(true);
+
+    showRobotInfo();
 }
 
