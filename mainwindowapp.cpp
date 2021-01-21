@@ -102,7 +102,30 @@ void MainWindowApp::turnRobotOff()
 
 void MainWindowApp::eraseCommand()
 {
+    //если в списке команд есть команды и единственная запись - не о пустоте команд
+    if(ui->commandsList->count() > 0 && ui->commandsList->item(0)->text() != emptyCommands)
+    {
+        if(ui->commandsList->currentItem() == nullptr)
+        {
+            QMessageBox::warning(this, "Предупреждение", "Ни одна из команд не была выделена");
+            return;
+        }
 
+        if(ui->listViewAllRobots->currentItem() == nullptr)
+            return;
+
+        //удаление выбранной команды
+        IRobot* selectedRobot = system->getRobot(ui->listViewAllRobots->currentItem()->text().toStdString());
+        if(selectedRobot)
+        {
+            if(selectedRobot->undoCommand(ui->commandsList->currentRow()))
+                QMessageBox::information(this, "Информация о команде", "Команда успешно удалена");
+            else
+                QMessageBox::warning(this, "Информация о команде", "Ошибка удаления команды");
+
+            showRobotInfo();
+        }
+    }
 }
 
 
