@@ -120,24 +120,43 @@ vector<string> RobotSystem::getRobotInfo()
     vector<string> info = robot->getRobotInfo();
 
     double *pos = robot->getCurrentPos();
+    std::ostringstream streamObjPX;
+    streamObjPX << std::fixed;
+    streamObjPX << std::setprecision(3);
+    streamObjPX << pos[0];
+
+    std::ostringstream streamObjPY;
+    streamObjPY << std::fixed;
+    streamObjPY << std::setprecision(3);
+    streamObjPY << pos[1];
+
+    std::ostringstream streamObjPZ;
+    streamObjPZ << std::fixed;
+    streamObjPZ << std::setprecision(3);
+    streamObjPZ << pos[2];
+
+    info.push_back("Local position ExecutiveUnit: "
+                   + streamObjPX.str() + "; "
+                   + streamObjPY.str() + "; "
+                   + streamObjPZ.str());
 
     //форматирование double
     std::ostringstream streamObjX;
     streamObjX << std::fixed;
     streamObjX << std::setprecision(3);
-    streamObjX << xSystemCoord + pos[0];
+    streamObjX << xSystemCoord;
 
     std::ostringstream streamObjY;
     streamObjY << std::fixed;
     streamObjY << std::setprecision(3);
-    streamObjY << ySystemCoord + pos[1];
+    streamObjY << ySystemCoord;
 
     std::ostringstream streamObjZ;
     streamObjZ << std::fixed;
     streamObjZ << std::setprecision(3);
-    streamObjZ << zSystemCoord + pos[2];
+    streamObjZ << zSystemCoord;
 
-    //добавление текущей позиции робота
+    //добавление позиции робота
     info.push_back("Position: "
                    + streamObjX.str() + "; "
                    + streamObjY.str() + "; "
