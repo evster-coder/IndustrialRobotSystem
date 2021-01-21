@@ -2,6 +2,7 @@
 #include <QStringList>
 #include "ControlSystem.h"
 #include "ExecutiveUnit.h"
+#include "Logger.h"
 #include "RobotSystem.h"
 #include "EUnitCreator.h"
 #include "EUnitHandCreator.h"

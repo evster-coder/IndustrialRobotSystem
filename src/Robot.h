@@ -10,6 +10,7 @@
 #include "ExecutiveUnit.h"
 #include "ISensorUnit.h"
 #include "IRobot.h"
+#include "Logger.h"
 
 #include <string>
 #include <vector>

@@ -116,6 +116,7 @@ string* Robot::executeOneCommand()
         //и ещё есть доступные команды
         if (commands.size() > 0)
         {
+            Logger::printText(getSerialNumber() + ": " + commands[0]->printCommand());
             string* commandRequest = commands[0]->doWork();
             //выполняем одну команду, при неудаче завершаем работу
             if (commandRequest[0] == "0")

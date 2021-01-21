@@ -1,11 +1,6 @@
 #include "mainwindowapp.h"
 #include "ui_mainwindowapp.h"
 
-#include "QMessageBox"
-#include <QRegExp>
-#include "QFuture"
-#include "QFutureWatcher"
-#include "QtConcurrent/QtConcurrent"
 
 
 MainWindowApp::MainWindowApp(QWidget *parent)
@@ -16,6 +11,8 @@ MainWindowApp::MainWindowApp(QWidget *parent)
 
     //создание и получение экземпляра фасада
     system = FacadeSystem::getInstance();
+
+    Logger::setImplementation(new QListWidgetLogger(ui->listWidgetResult));
 
     refreshRobotsList();
 

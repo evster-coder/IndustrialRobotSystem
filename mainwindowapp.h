@@ -2,12 +2,20 @@
 #define MAINWINDOWAPP_H
 
 #include <QMainWindow>
-#include <QVector>
 
 #include "dialogaddrobot.h"
 #include "dialogdeleterobot.h"
 
+#include "QMessageBox"
+#include <QVector>
+#include <QRegExp>
+#include <QFuture>
+#include "QFutureWatcher"
+#include "QtConcurrent/QtConcurrent"
+
 #include "src/FacadeSystem.h"
+#include "src/Logger.h"
+#include "src/QListWidgetLogger.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowApp; }

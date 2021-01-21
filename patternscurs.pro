@@ -27,8 +27,11 @@ SOURCES += \
     src/ExecutiveUnitHand.cpp \
     src/ExecutiveUnitSpray.cpp \
     src/FacadeSystem.cpp \
+    src/FileLogger.cpp \
+    src/Logger.cpp \
     src/MoveMovingUnit.cpp \
     src/MovingUnit.cpp \
+    src/QListWidgetLogger.cpp \
     src/Robot.cpp \
     src/RobotSystem.cpp \
     src/ScanSensorUnit.cpp \
@@ -55,11 +58,15 @@ HEADERS += \
     src/ExecutiveUnitHand.h \
     src/ExecutiveUnitSpray.h \
     src/FacadeSystem.h \
+    src/FileLogger.h \
     src/IRobot.h \
     src/ISensorUnit.h \
+    src/Logger.h \
+    src/LoggerImpl.h \
     src/MoveMovingUnit.h \
     src/MovingUnit.h \
     src/ProgramUnit.h \
+    src/QListWidgetLogger.h \
     src/Robot.h \
     src/RobotSystem.h \
     src/ScanSensorUnit.h \
