@@ -21,6 +21,11 @@ MovingUnit::MovingUnit(double xRange, double yRange, double zRange)
 	isMove = false;
 }
 
+MovingUnit::MovingUnit()
+{
+    xMoveRange = yMoveRange = zMoveRange = positionX = positionY = positionZ = 0;
+}
+
 string* MovingUnit::moveDevice(double x, double y, double z, double speed)
 {
     //результат выполнения функции в виде ответа

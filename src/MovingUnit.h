@@ -20,6 +20,7 @@ public:
 	//конструктор устройства передвижения
 	//XRange, yRange, zRange - границы перемещения устройства
 	MovingUnit(double xRange, double yRange, double zRange);
+    MovingUnit();
 
 	//переместить устройство в позицию
 	//(x; y; z) мм со скоростью speed мм/сек
